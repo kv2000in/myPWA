@@ -6,10 +6,23 @@
 	objectVersion = 50;
 	objects = {
 
+/* Begin PBXFileReference section */
+		2A6E21E92C42324D0036D09F /* AorticStenosis.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AorticStenosis.png; sourceTree = "<group>"; };
+		2A6E21EA2C42324D0036D09F /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
+		2A6E21EB2C42324E0036D09F /* pwa.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = pwa.html; sourceTree = "<group>"; };
+		2A6E21EC2C42324E0036D09F /* sw.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = sw.js; sourceTree = "<group>"; };
+		2A6E21ED2C42324E0036D09F /* icon-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-512.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
 /* Begin PBXGroup section */
 		2A6E21E22C422E650036D09F = {
 			isa = PBXGroup;
 			children = (
+				2A6E21E92C42324D0036D09F /* AorticStenosis.png */,
+				2A6E21ED2C42324E0036D09F /* icon-512.png */,
+				2A6E21EA2C42324D0036D09F /* manifest.json */,
+				2A6E21EB2C42324E0036D09F /* pwa.html */,
+				2A6E21EC2C42324E0036D09F /* sw.js */,
 			);
 			sourceTree = "<group>";
 		};
