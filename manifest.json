@@ -1,0 +1,12 @@
+
+{
+  "short_name": "Chris Tam's App",
+  "start_url" : "/pwa/AorticStenosis.png",
+  "icons": [
+    {
+      "src": "/pwa/icon-512.png",
+      "sizes": "512x512"
+    }
+  ],
+  "display": "standalone"
+}

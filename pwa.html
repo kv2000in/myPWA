@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="manifest" href="pwa/manifest.json" />
+    <!-- ... -->
+  </head>
+  <body>
+<h1>Yes Chris, it works. Now go to the "three dots" menu of your browser and add it to home screen or "install it"</h1>
+
+
+    <script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/pwa/sw.js").then(
+    (registration) => {
+      console.log("Service worker registration successful:", registration);
+    },
+    (error) => {
+      console.error(`Service worker registration failed: ${error}`);
+    },
+  );
+} else {
+  console.error("Service workers are not supported.");
+}
+
+
+    </script>
+</body>
+</html>
+
