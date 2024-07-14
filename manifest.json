@@ -1,12 +1,15 @@
 
 {
-  "short_name": "Chris Tam's App",
-  "start_url" : "/pwa/AorticStenosis.png",
-  "icons": [
-    {
-      "src": "/pwa/icon-512.png",
-      "sizes": "512x512"
-    }
-  ],
-  "display": "standalone"
+	"short_name": "ACTA Fellows Tool Box",
+	"start_url": "/pwa.html",
+	"icons": [
+		{
+			"src": "/pwa/icon-512.png",
+			"sizes": "512x512"
+		}
+	],
+	"display": "standalone",
+	"name": "Chris Tam's App",
+	"theme_color": "#000000",
+	"background_color": "#000000"
 }

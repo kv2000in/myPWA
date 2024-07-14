@@ -3,12 +3,38 @@
   <head>
     <link rel="manifest" href="pwa/manifest.json" />
     <!-- ... -->
-  </head>
+      
+<style>
+.button {
+  background-color: #008CBA; /* Blue*/
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}      
+      </style> 
+    
+    </head>
   <body>
-<h1>Yes Chris, it works. Now go to the "three dots" menu of your browser and add it to home screen or "install it"</h1>
+<h1>ACTA Fellows Tool Box - Thank you Dr. Tam! </h1>
+      
+      <button class="button" onclick="openPage('/pwa/AorticStenosis.png')">AS</button>
 
-
+      <button class="button" onclick="openPage('/pwa/MR.jpg')">MR</button>
+      
     <script>
+        
+        function openPage(whichURL) {
+            window.open(
+                whichURL, 
+                "_self"
+                 );
+        }
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/pwa/sw.js").then(
     (registration) => {

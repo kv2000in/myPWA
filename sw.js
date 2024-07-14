@@ -10,7 +10,7 @@ const APP_STATIC_RESOURCES = [
   "/pwa.html",
   "/pwa/AorticStenosis.png",
   "/pwa/icon-512.png",
- 
+  "/pwa/MR.jpg",
 ];
 
 
