@@ -11,6 +11,8 @@ const APP_STATIC_RESOURCES = [
   "/pwa/AorticStenosis.png",
   "/pwa/icon-512.png",
   "/pwa/MR.jpg",
+    "/pwa/manifest.json"
+    "/pwa/sw.js"
 ];
 
 
