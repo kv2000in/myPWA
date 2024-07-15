@@ -1,10 +1,10 @@
 
 {
 	"short_name": "ACTA Fellows Tool Box",
-	"start_url": "/pwa.html",
+	"start_url": "./pwa.html",
 	"icons": [
 		{
-			"src": "/icon-512.png",
+			"src": "./icon-512.png",
 			"sizes": "512x512"
 		}
 	],
