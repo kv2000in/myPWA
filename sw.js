@@ -8,13 +8,13 @@ const CACHE_NAME = `Chris-Tams-App-${VERSION}`;
 const APP_STATIC_RESOURCES = [
 
   "/pwa.html",
-  "/pwa/AorticStenosis.png",
-  "/pwa/icon-512.png",
-  "/pwa/MR.jpg",
-    "/pwa/manifest.json",
-    "/pwa/sw.js",
-    "/pwa/AS.html",
-    "/pwa/MR.html",
+  "/AorticStenosis.png",
+  "/icon-512.png",
+  "/MR.jpg",
+    "/manifest.json",
+    "/sw.js",
+    "/AS.html",
+    "/MR.html",
 ];
 
 
@@ -28,6 +28,7 @@ const cacheFirst = async ({ request, fallbackUrl }) => {
   // First try to get the resource from the cache.
   const responseFromCache = await caches.match(request);
   if (responseFromCache) {
+	  console.log ("Returning resources from Cache");
     return responseFromCache;
   }
 
@@ -40,12 +41,14 @@ const cacheFirst = async ({ request, fallbackUrl }) => {
     // - return the original to the app
     // Cloning is needed because a response can only be consumed once.
     putInCache(request, responseFromNetwork.clone());
+	   console.log ("Returning resources from Network");
     return responseFromNetwork;
   } catch (error) {
     // If the network request failed,
     // get the fallback response from the cache.
     const fallbackResponse = await caches.match(fallbackUrl);
     if (fallbackResponse) {
+		 console.log ("Returning fallback response");
       return fallbackResponse;
     }
     // When even the fallback response is not available,
