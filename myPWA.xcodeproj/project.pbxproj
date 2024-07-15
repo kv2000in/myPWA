@@ -13,6 +13,8 @@
 		2A6E21EC2C42324E0036D09F /* sw.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = sw.js; sourceTree = "<group>"; };
 		2A6E21ED2C42324E0036D09F /* icon-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-512.png"; sourceTree = "<group>"; };
 		2AD737CB2C436CC900A50980 /* MR.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MR.jpg; sourceTree = "<group>"; };
+		2AD737CC2C44D5C100A50980 /* AS.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = AS.html; sourceTree = "<group>"; };
+		2AD737CD2C44D66500A50980 /* MR.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = MR.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -24,6 +26,8 @@
 				2A6E21ED2C42324E0036D09F /* icon-512.png */,
 				2A6E21EA2C42324D0036D09F /* manifest.json */,
 				2A6E21EB2C42324E0036D09F /* pwa.html */,
+				2AD737CC2C44D5C100A50980 /* AS.html */,
+				2AD737CD2C44D66500A50980 /* MR.html */,
 				2A6E21EC2C42324E0036D09F /* sw.js */,
 			);
 			sourceTree = "<group>";

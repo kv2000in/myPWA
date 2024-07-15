@@ -13,6 +13,8 @@ const APP_STATIC_RESOURCES = [
   "/pwa/MR.jpg",
     "/pwa/manifest.json"
     "/pwa/sw.js"
+    "/pwa/AS.html"
+    "/pwa/MR.html"
 ];
 
 
