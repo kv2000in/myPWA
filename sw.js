@@ -7,14 +7,14 @@ const CACHE_NAME = `Chris-Tams-App-${VERSION}`;
 // The static resources that the app needs to function.
 const APP_STATIC_RESOURCES = [
 
-  "/pwa.html",
-  "/AorticStenosis.png",
-  "/icon-512.png",
-  "/MR.jpg",
-    "/manifest.json",
-    "/sw.js",
-    "/AS.html",
-    "/MR.html",
+  "./pwa.html",
+  "./AorticStenosis.png",
+  "./icon-512.png",
+  "./MR.jpg",
+    "./manifest.json",
+    "./sw.js",
+    "./AS.html",
+    "./MR.html",
 ];
 
 
@@ -113,7 +113,7 @@ self.addEventListener("fetch", (event) => {
   event.respondWith(
     cacheFirst({
       request: event.request,
-      fallbackUrl: "/pwa/icon-512.png",
+      fallbackUrl: "./icon-512.png",
     }),
   );
 });

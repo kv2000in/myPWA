@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <link rel="manifest" href="/manifest.json" />
+    <link rel="manifest" href="./manifest.json" />
     <!-- ... -->
       
 <style>
@@ -23,9 +23,9 @@
   <body>
 <h1>ACTA Fellows Tool Box - Thank you Dr. Tam! </h1>
       
-      <button class="button" onclick="openPage('/AS.html')">AS</button>
+      <button class="button" onclick="openPage('./AS.html')">AS</button>
 
-      <button class="button" onclick="openPage('/MR.html')">MR</button>
+      <button class="button" onclick="openPage('./MR.html')">MR</button>
       
     
       
@@ -38,7 +38,7 @@
                  );
         }
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/sw.js").then(
+  navigator.serviceWorker.register("./sw.js").then(
     (registration) => {
       console.log("Service worker registration successful:", registration);
     },
