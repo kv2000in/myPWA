@@ -16,6 +16,7 @@ This makes sure that the padding and border are included in the total width and 
 
 * {
   box-sizing: border-box;
+    font-family: fantasy;
 }
 
 img {
@@ -103,3 +104,30 @@ Make "item8" start on row-line 1 and column-line 2, and end on row-line 5 and co
 	cursor: pointer;
     width:60%;
 }  
+
+h1{
+    text-align: center;
+    font: 
+}
+        table {
+            width: 100%;
+            
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-radius: 10px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+ tr:hover {
+          background-color: #ffff99;
+        }
+
+.footer{
+    font-size: 20px;
+}
