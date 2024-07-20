@@ -26,6 +26,7 @@
     <div class="item5" >	  <button class="button" onclick="openPage('./AR.html')">AR</button></div>
       
     <div class="item6" >	  <p class = "footer">Courtesy Dr. Tam </p></div>
+      </div>
       
     <script>
         
@@ -37,10 +38,10 @@
         }
 
         
-navigator.serviceWorker.getRegistration("/").then((registration) => {
+navigator.serviceWorker.getRegistration("./").then((registration) => {
   if (registration) {
-    document.querySelector("#status").textContent =
-      "ServiceWorkerRegistration found.";
+    console.log(
+      "ServiceWorkerRegistration found.");
   } else {
       
         
