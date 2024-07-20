@@ -16,7 +16,7 @@ This makes sure that the padding and border are included in the total width and 
 
 * {
   box-sizing: border-box;
-    font-family: fantasy;
+    font: status-bar;
 }
 
 img {
@@ -107,22 +107,24 @@ Make "item8" start on row-line 1 and column-line 2, and end on row-line 5 and co
 
 h1{
     text-align: center;
-    font: 
+    font-size: xx-large;
+    margin: auto;
 }
         table {
             width: 100%;
             
         }
-        table, th, td {
+        th, td {
             border: 1px solid black;
-            border-radius: 10px;
+            border-radius: 5px;
+            
         }
         th, td {
-            padding: 10px;
+            padding: 5px;
             text-align: center;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #a3ebbe;
         }
  tr:hover {
           background-color: #ffff99;
