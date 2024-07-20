@@ -12,22 +12,32 @@
 		2A6E21EB2C42324E0036D09F /* pwa.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = pwa.html; sourceTree = "<group>"; };
 		2A6E21EC2C42324E0036D09F /* sw.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = sw.js; sourceTree = "<group>"; };
 		2A6E21ED2C42324E0036D09F /* icon-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-512.png"; sourceTree = "<group>"; };
-		2AD737CB2C436CC900A50980 /* MR.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MR.jpg; sourceTree = "<group>"; };
+		2AC59C322C4B79040089A9A2 /* AR.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = AR.html; sourceTree = "<group>"; };
+		2AC59C332C4B79390089A9A2 /* MS.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = MS.html; sourceTree = "<group>"; };
+		2AC59C342C4B7A590089A9A2 /* AR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AR.png; sourceTree = "<group>"; };
+		2AC59C352C4B7A590089A9A2 /* MR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MR.png; sourceTree = "<group>"; };
+		2AC59C362C4B7A590089A9A2 /* MS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MS.png; sourceTree = "<group>"; };
 		2AD737CC2C44D5C100A50980 /* AS.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = AS.html; sourceTree = "<group>"; };
 		2AD737CD2C44D66500A50980 /* MR.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = MR.html; sourceTree = "<group>"; };
+		2AD737CE2C466A0400A50980 /* pwa.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = pwa.css; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		2A6E21E22C422E650036D09F = {
 			isa = PBXGroup;
 			children = (
-				2AD737CB2C436CC900A50980 /* MR.jpg */,
 				2A6E21E92C42324D0036D09F /* AorticStenosis.png */,
 				2A6E21ED2C42324E0036D09F /* icon-512.png */,
 				2A6E21EA2C42324D0036D09F /* manifest.json */,
+				2AD737CE2C466A0400A50980 /* pwa.css */,
 				2A6E21EB2C42324E0036D09F /* pwa.html */,
 				2AD737CC2C44D5C100A50980 /* AS.html */,
 				2AD737CD2C44D66500A50980 /* MR.html */,
+				2AC59C322C4B79040089A9A2 /* AR.html */,
+				2AC59C332C4B79390089A9A2 /* MS.html */,
+				2AC59C342C4B7A590089A9A2 /* AR.png */,
+				2AC59C352C4B7A590089A9A2 /* MR.png */,
+				2AC59C362C4B7A590089A9A2 /* MS.png */,
 				2A6E21EC2C42324E0036D09F /* sw.js */,
 			);
 			sourceTree = "<group>";

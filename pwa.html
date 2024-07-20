@@ -2,33 +2,31 @@
 <html lang="en">
   <head>
     <link rel="manifest" href="./manifest.json" />
+    <link rel="stylesheet" href="./pwa.css">
     <!-- ... -->
       
-<style>
-.button {
-  background-color: #008CBA; /* Blue*/
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}      
-      </style> 
+ 
     
     </head>
   <body>
-<h1>ACTA Fellows Tool Box - Thank you Dr. Tam! </h1>
       
-      <button class="button" onclick="openPage('./AS.html')">AS</button>
+<div class="grid-container">
+ 
+ 
+
+      
+      <div class="item1"><h1>ACTA Fellows Tool Box - Thank you Dr. Tam! </h1></div>
+      
+     <div class="item6" ><button class="button" onclick="openPage('./AS.html')">AS</button>
 
       <button class="button" onclick="openPage('./MR.html')">MR</button>
+	  
+	  <div class="item6" ><button class="button" onclick="openPage('./MS.html')">MS</button>
+		  
+		  <button class="button" onclick="openPage('./AR.html')">AR</button>
       
-    
-      
+    </div>
+      </div>
     <script>
         
         function openPage(whichURL) {
@@ -37,7 +35,16 @@
                 "_self"
                  );
         }
-if ("serviceWorker" in navigator) {
+
+        
+navigator.serviceWorker.getRegistration("/").then((registration) => {
+  if (registration) {
+    document.querySelector("#status").textContent =
+      "ServiceWorkerRegistration found.";
+  } else {
+      
+        
+        if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("./sw.js").then(
     (registration) => {
       console.log("Service worker registration successful:", registration);
@@ -49,7 +56,9 @@ if ("serviceWorker" in navigator) {
 } else {
   console.error("Service workers are not supported.");
 }
-
+}
+});        
+  
 
     </script>
 </body>

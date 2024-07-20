@@ -1,0 +1,71 @@
+/*** Sass - requires Ruby Installation */
+/* Define standard variables and values for website */
+/*$bgcolor: lightblue;
+$textcolor: darkblue;
+$btnbgcolor:#008CBA; 
+$fontsize: 18px;
+$screenwidthtransition:500px;
+*/
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    
+    'header header header header header header'
+    'menu main main main right right'
+    'menu footer footer footer footer footer';
+  gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
+
+.item1 { grid-area: header; }
+.item2 { grid-area: menu; }
+.item3 { grid-area: main; }
+.item4 { grid-area: right; }
+.item5 { grid-area: footer; }
+
+/* Change layout for smaller screen width  */
+@media only screen and (max-width: 500px) {
+.grid-container {
+  display: grid;
+  grid-template-areas:
+       'header header'
+    'menu menu' 
+    'main main' 
+    'right right'
+    'footer footer';
+  gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+}
+}
+
+
+
+
+
+
+
+
+
+
+.button {
+	background-color: #008CBA;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+}  

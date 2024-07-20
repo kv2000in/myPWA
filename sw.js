@@ -63,7 +63,13 @@ const cacheFirst = async ({ request, fallbackUrl }) => {
 
 
 
-// On install or activate cache the static resources
+// On install  cache the static resources
+/*Installation is attempted when the downloaded file is found to be new 
+— either different to an existing service worker (byte-wise compared), 
+    or the first service worker encountered for this page/site.
+    If this is the first time a service worker has been made available, 
+        installation is attempted, then after a successful installation, it is activated.*/
+
 self.addEventListener("install", (event) => {
   event.waitUntil(
     (async () => {
