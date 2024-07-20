@@ -7,45 +7,77 @@ $fontsize: 18px;
 $screenwidthtransition:500px;
 */
 
+
+
+/*
+all HTML elements have the box-sizing property set to border-box. 
+This makes sure that the padding and border are included in the total width and height of the elements.
+*/
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 .grid-container {
   display: grid;
-  grid-template-areas:
-    
-    'header header header header header header'
-    'menu main main main right right'
-    'menu footer footer footer footer footer';
-  gap: 10px;
-  background-color: #2196F3;
-  padding: 10px;
+/*    Set 12 columns with auto width*/
+grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
+ background-color: #d6efe3;
+    border-radius: 20px;
 }
 
 .grid-container > div {
-  background-color: rgba(255, 255, 255, 0.8);
+  
   text-align: center;
   padding: 20px 0;
   font-size: 30px;
+        font: status-bar;
+}
+/*
+Make "item1" start on row 1 and span 2 rows:
+
+.item1 {
+  grid-row: 1 / span 2;
+}
+The grid-row property is a shorthand property for the grid-row-start and the grid-row-end properties.
+
+Make "item1" start on column 1 and end before column 5:
+
+.item1 {
+  grid-column: 1 / 5;
 }
 
-.item1 { grid-area: header; }
-.item2 { grid-area: menu; }
-.item3 { grid-area: main; }
-.item4 { grid-area: right; }
-.item5 { grid-area: footer; }
+The grid-column property is a shorthand property for the grid-column-start and the grid-column-end properties.
+
+The grid-area property can be used as a shorthand property 
+for the grid-row-start, grid-column-start, grid-row-end and the grid-column-end properties.
+Make "item8" start on row-line 1 and column-line 2, and end on row-line 5 and column line 6:
+
+.item8 {
+  grid-area: 1 / 2 / 5 / 6;
+}
+*/
+
+.item1 { grid-area: 1 / 1 / 1 / 12 ; }
+.item2 { grid-area: 2 / 1 / 2 / 6; }
+.item3 { grid-area: 2 / 6 / 2 / 12; }
+.item4 { grid-area: 3 / 1 / 3 / 6; }
+.item5 { grid-area: 3 / 6 / 3 / 12 ;}
+.item6 { grid-area: 4 / 1 / 4 / 12 ;}
 
 /* Change layout for smaller screen width  */
 @media only screen and (max-width: 500px) {
-.grid-container {
-  display: grid;
-  grid-template-areas:
-       'header header'
-    'menu menu' 
-    'main main' 
-    'right right'
-    'footer footer';
-  gap: 10px;
-  background-color: #2196F3;
-  padding: 10px;
-}
+.item1 { grid-area: 1 / 1 / 1 / 12 ; }
+.item2 { grid-area: 2 / 1 / 2 / 12; }
+.item3 { grid-area: 3 / 1 / 3 / 12; }
+.item4 { grid-area: 4 / 1 / 4 / 12; }
+.item5 { grid-area: 5 / 1 / 5 / 12 ; }
+.item6 { grid-area: 6 / 1 / 6 / 12 ;}    
 }
 
 
@@ -58,14 +90,16 @@ $screenwidthtransition:500px;
 
 
 .button {
-	background-color: #008CBA;
+	background-color: #0023ba;
 	border: none;
+    border-radius: 10px;
 	color: white;
 	padding: 15px 32px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
-	font-size: 16px;
+	font-size: inherit;
 	margin: 4px 2px;
 	cursor: pointer;
+    width:60%;
 }  
