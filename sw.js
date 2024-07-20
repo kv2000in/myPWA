@@ -10,11 +10,16 @@ const APP_STATIC_RESOURCES = [
   "./pwa.html",
   "./AorticStenosis.png",
   "./icon-512.png",
-  "./MR.jpg",
+  "./MR.png",
     "./manifest.json",
     "./sw.js",
     "./AS.html",
     "./MR.html",
+    "./AR.html",
+    "./MS.html",
+    "./pwa.css",
+    "./MS.png",
+    "./AR.png",
 ];
 
 
@@ -73,13 +78,30 @@ const cacheFirst = async ({ request, fallbackUrl }) => {
 self.addEventListener("install", (event) => {
   event.waitUntil(
     (async () => {
-      const cache = await caches.open(CACHE_NAME);
-      cache.addAll(APP_STATIC_RESOURCES);
+
+
+//a)delete old cache
+    
+    caches.open("v1").then((cache) => {
+  cache.delete(APP_STATIC_RESOURCES).then((response) => {
+    console.log("Old cache deleted");
+  });
+});    
+        
+//b)request all the resources from network and add all static resources to the cache
+          const cache = await caches.open(CACHE_NAME);
+      cache.addAll(APP_STATIC_RESOURCES);    
+        
+console.log("Cache renewed");
+        
+        
+        
     })(),
   );
 });
 
 self.addEventListener("activate", (event) => {
+    console.log("handling activate event, renewing cache");
   event.waitUntil(
     (async () => {
       const cache = await caches.open(CACHE_NAME);
