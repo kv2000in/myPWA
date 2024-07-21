@@ -104,13 +104,7 @@ self.addEventListener("install", (event) => {
         
 //b)request all the resources from network and add all static resources to the cache
           const cache = await caches.open(CACHE_NAME);
-  cache.matchAll().then((responses) => {
-    console.log(`Found ${responses.length} matching responses`);
-  });
-
-        
-        
-      cache.addAll(APP_STATIC_RESOURCES);    
+        cache.addAll(APP_STATIC_RESOURCES);    
         
 console.log("Cache renewed");
         
