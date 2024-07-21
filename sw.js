@@ -67,7 +67,7 @@ const cacheFirst = async ({ request, fallbackUrl }) => {
 };
 
 
-async function cacheFirstWithRefresh(request) {
+const cacheFirstWithRefresh = async ({request}) =>  {
   const fetchResponsePromise = fetch(request).then(async (networkResponse) => {
     if (networkResponse.ok) {
       const cache = await caches.open(CACHE_NAME);
@@ -92,13 +92,13 @@ self.addEventListener("install", (event) => {
     (async () => {
 
 
-//a)delete old cache
+//a)delete old cache - what if there is no network
     
-    caches.open(CACHE_NAME).then((cache) => {
+  /*  caches.open(CACHE_NAME).then((cache) => {
   cache.delete(APP_STATIC_RESOURCES).then((response) => {
     console.log("Old cache deleted");
   });
-});    
+}); */   
         
 //b)request all the resources from network and add all static resources to the cache
           const cache = await caches.open(CACHE_NAME);
