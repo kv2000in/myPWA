@@ -67,6 +67,18 @@ const cacheFirst = async ({ request, fallbackUrl }) => {
 };
 
 
+async function cacheFirstWithRefresh(request) {
+  const fetchResponsePromise = fetch(request).then(async (networkResponse) => {
+    if (networkResponse.ok) {
+      const cache = await caches.open(CACHE_NAME);
+      cache.put(request, networkResponse.clone());
+    }
+    return networkResponse;
+  });
+
+  return (await caches.match(request)) || (await fetchResponsePromise);
+}
+
 
 // On install  cache the static resources
 /*Installation is attempted when the downloaded file is found to be new 
@@ -101,13 +113,8 @@ console.log("Cache renewed");
 });
 
 self.addEventListener("activate", (event) => {
-    console.log("handling activate event, renewing cache");
-  event.waitUntil(
-    (async () => {
-      const cache = await caches.open(CACHE_NAME);
-      cache.addAll(APP_STATIC_RESOURCES);
-    })(),
-  );
+    console.log("handling activate event");
+
 });
 
 
@@ -137,11 +144,19 @@ self.addEventListener("activate", (event) => {
 
 
 
-self.addEventListener("fetch", (event) => {
+/*self.addEventListener("fetch", (event) => {
   event.respondWith(
     cacheFirst({
       request: event.request,
       fallbackUrl: "./icon-512.png",
+    }),
+  );
+});*/
+
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    cacheFirstWithRefresh({
+      request: event.request
     }),
   );
 });
