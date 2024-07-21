@@ -77,11 +77,8 @@ const cacheFirstWithRefresh = async ({request}) =>  {
     return networkResponse;
   });
 
-    const cachedresponse = {
-        console.log("cached response");
-        return caches.match(request);
-    }
-  return (await cachedresponse) || (await fetchResponsePromise);
+
+  return (await caches.match(request)) || (await fetchResponsePromise);
 }
 
 
