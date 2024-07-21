@@ -73,10 +73,15 @@ const cacheFirstWithRefresh = async ({request}) =>  {
       const cache = await caches.open(CACHE_NAME);
       cache.put(request, networkResponse.clone());
     }
+      console.log("fresh response from Network");
     return networkResponse;
   });
 
-  return (await caches.match(request); console.log("Cached response")) || (await fetchResponsePromise; console.log("fresh response from Network"));
+    const cachedresponse = {
+        console.log("cached response");
+        return caches.match(request);
+    }
+  return (await cachedresponse) || (await fetchResponsePromise);
 }
 
 
