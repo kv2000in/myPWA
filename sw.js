@@ -25,7 +25,7 @@ const APP_STATIC_RESOURCES = [
 
 
 const putInCache = async (request, response) => {
-  const cache = await caches.open("v1");
+  const cache = await caches.open(CACHE_NAME);
   await cache.put(request, response);
 };
 
@@ -82,7 +82,7 @@ self.addEventListener("install", (event) => {
 
 //a)delete old cache
     
-    caches.open("v1").then((cache) => {
+    caches.open(CACHE_NAME).then((cache) => {
   cache.delete(APP_STATIC_RESOURCES).then((response) => {
     console.log("Old cache deleted");
   });
