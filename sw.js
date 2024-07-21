@@ -73,7 +73,7 @@ const cacheFirstWithRefresh = async ({request}) =>  {
       const cache = await caches.open(CACHE_NAME);
       cache.put(request, networkResponse.clone());
     }
-      console.log("fresh response from Network");
+    
     return networkResponse;
   });
 
