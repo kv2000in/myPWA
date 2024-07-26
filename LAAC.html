@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>ACTA Fellows' Tool Box </title>
+		<meta charset="UTF-8">
+			<link rel="manifest" href="./manifest.json" />
+			<link rel="stylesheet" href="./pwa.css">
+				<!-- ... -->
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
+					
+					<!-- Meta Description -->
+					<meta name="description" content="This is a work in progress, to provide easily accessible Echo Tables for fellows.">
+						
+						<!-- Open Graph Meta Tags -->
+						<meta property="og:title" content="ACTA Fellows' Tool Box Home page">
+							<meta property="og:description" content="This is a work in progress, to provide easily accessible Echo Tables for fellows.">
+								<meta property="og:image" content="./icon-512.png">
+									<meta property="og:type" content="website">
+										<meta property="og:url" content="https://kv2000inn.ddns.net:65001/pwa/pwa.html">
+											
+											
+											</head>
+	<body oncontextmenu="return false;">
+		<h1>Left Atrial Appendage Closure</h1>
+		
+		<br>
+
+		
+	
+		
+		<div id="pdfContainer">
+			<button class = "button" id="PDFbackButton">Hide PDF</button>
+			<iframe id="pdfViewer" src="" width="100%" height="100%"></iframe>
+		</div>
+		
+		<button class="button" onclick="history.back();">Prev</button>
+		
+		<!--        <iframe width="560" height="315" src="https://www.youtube.com/embed/arBW-FfbIQE?si=11SzkxsoblIt8Lvy" 
+		 title="YouTube video player" frameborder="0" 
+		 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+		 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+		 </iframe>-->
+		
+		<script>
+			
+			function openPage(whichURL) {
+				window.open(
+							whichURL, 
+							"_self"
+							);
+			}
+		
+		document.getElementById('ShowPDFButtonAS').addEventListener('click', function() {
+																	var pdfContainer = document.getElementById('pdfContainer');
+																	pdfContainer.style.display = 'block';
+																	this.style.display = 'none'; // Hide the show button
+																	});
+																	
+																	document.getElementById('PDFbackButton').addEventListener('click', function() {
+																															  var pdfContainer = document.getElementById('pdfContainer');
+																															  pdfContainer.style.display = 'none';
+																															  document.getElementById('ShowPDFButtonAS').style.display = 'inline'; // Show the toggle button
+																															  });
+																															  
+			</script>
+	</body>
+</html>
+
+
+

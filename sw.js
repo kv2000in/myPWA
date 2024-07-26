@@ -20,6 +20,8 @@ const APP_STATIC_RESOURCES = [
     "./pwa.css",
     "./MS.png",
     "./AR.png",
+	"./LAAC.html",
+	"./2017AorticValveStenosisGuideline.pdf",
 ];
 
 
@@ -162,3 +164,10 @@ self.addEventListener("fetch", (event) => {
     }),
   );
 });
+
+function openPage(whichURL) {
+				window.open(
+							whichURL, 
+							"_self"
+							);
+			}
