@@ -17,6 +17,7 @@
 		2AC59C342C4B7A590089A9A2 /* AR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AR.png; sourceTree = "<group>"; };
 		2AC59C352C4B7A590089A9A2 /* MR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MR.png; sourceTree = "<group>"; };
 		2AC59C362C4B7A590089A9A2 /* MS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MS.png; sourceTree = "<group>"; };
+		2ACC85212C59F45C00370D12 /* pdfjs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = pdfjs; sourceTree = "<group>"; };
 		2AD737CC2C44D5C100A50980 /* AS.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = AS.html; sourceTree = "<group>"; };
 		2AD737CD2C44D66500A50980 /* MR.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = MR.html; sourceTree = "<group>"; };
 		2AD737CE2C466A0400A50980 /* pwa.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = pwa.css; sourceTree = "<group>"; };
@@ -28,6 +29,7 @@
 		2A6E21E22C422E650036D09F = {
 			isa = PBXGroup;
 			children = (
+				2ACC85212C59F45C00370D12 /* pdfjs */,
 				2AE3EAEA2C53673100C78C59 /* LAAC.html */,
 				2AE3EAE92C53446200C78C59 /* 2017AorticValveStenosisGuideline.pdf */,
 				2A6E21E92C42324D0036D09F /* AorticStenosis.png */,
