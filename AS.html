@@ -73,7 +73,7 @@
             </tr>
         
             <tr><td colspan="5"> <a href="https://www.youtube.com/watch?v=arBW-FfbIQE&feature=youtu.be">Webinar ASE 2017 Aortic Stenosis Guidlines
-                </a>     <button class = "button" id="show-hide-canvas">Toggle PDF</button>
+                </a>     <button class = "button" id="toggle-canvas">Toggle PDF</button>
     <!--<button class="button" id="ShowPDFButtonAS" > Show PDF </button>--></td></tr>
              <!--<button class = "button" id="PDFbackButton">Hide PDF</button>-->
              </tbody>
@@ -118,118 +118,110 @@
     document.getElementById('ShowPDFButtonAS').style.display = 'inline'; // Show the toggle button
 });*/
 			</script>
+        <div id="pdf-controls">
         <canvas id="the-canvas"></canvas>
-        <button  class = "button pdf" id="prev-page">Previous Page</button>
-<button class = "button pdf" id="next-page">Next Page</button>
-        <button class = "button pdf" id="zoom-in">Zoom In</button>
-<button class = "button pdf" id="zoom-out">Zoom Out</button> <button class = "button pdf" id="download-pdf">Download PDF</button>
+        <button  class = "button pdf" id="prev-page">&lt;</button>
+        <button class = "button pdf" id="goto-page">Go to Page</button>
+<button class = "button pdf" id="next-page">&gt;</button>
+        <button class = "button pdf" id="zoom-in">+</button>
+<button class = "button pdf" id="zoom-out">-</button> <button class = "button pdf" id="download-pdf">|v|</button>
+        </div>
+     <script type="module">
+        var url = './2017AorticValveStenosisGuideline.pdf';
+        var { pdfjsLib } = globalThis;
 
-  <script type="module">
-  // If absolute URL from the remote server is provided, configure the CORS
-  // header on that server.
-  var url = './2017AorticValveStenosisGuideline.pdf';
+        pdfjsLib.GlobalWorkerOptions.workerSrc = './pdfjs/pdf.worker.mjs';
 
-  // Loaded via <script> tag, create shortcut to access PDF.js exports.
-  var { pdfjsLib } = globalThis;
+        var loadingTask = pdfjsLib.getDocument({
+            url: url,
+            disableRange: true
+        });
 
-  // The workerSrc property shall be specified.
-  pdfjsLib.GlobalWorkerOptions.workerSrc = './pdfjs/pdf.worker.mjs';
+        var initialState = {
+            pdf: null,
+            currentPage: 1,
+            zoom: 1,
+            canvasVisible: false
+        };
 
-  // Asynchronous download of PDF with disableRange set to true
-  var loadingTask = pdfjsLib.getDocument({
-    url: url,
-    disableRange: true // Disable range requests
-  });
+        loadingTask.promise.then(function(pdf) {
+            initialState.pdf = pdf;
+            console.log('PDF loaded');
+            renderPage(initialState.currentPage);
+            document.getElementById('pdf-controls').style.display = 'block'; // Show controls when PDF is loaded
+        }, function (reason) {
+            console.error(reason);
+        });
 
-  loadingTask.promise.then(function(pdf) {
-    console.log('PDF loaded');
-    initialState.pdf = pdf; // Store the loaded PDF document
-    renderPage(initialState.currentPage); // Render the first page
-  }, function (reason) {
-    // PDF loading error
-    console.error(reason);
-  });
+        document.getElementById('prev-page').addEventListener('click', function () {
+            if (initialState.pdf && initialState.currentPage > 1) {
+                initialState.currentPage--;
+                renderPage(initialState.currentPage);
+            }
+        });
 
-  const initialState = {
-    pdf: null,
-    currentPage: 1,
-    zoom: 1,
-    canvasVisible: true
-  };
+        document.getElementById('next-page').addEventListener('click', function () {
+            if (initialState.pdf && initialState.currentPage < initialState.pdf.numPages) {
+                initialState.currentPage++;
+                renderPage(initialState.currentPage);
+            }
+        });
 
-  document.getElementById('prev-page').addEventListener('click', function () {
-    if (initialState.pdf && initialState.currentPage > 1) {
-      initialState.currentPage--;
-      renderPage(initialState.currentPage);
-    }
-  });
+        document.getElementById('zoom-in').addEventListener('click', function () {
+            if (initialState.pdf) {
+                initialState.zoom *= 4 / 3;
+                renderPage(initialState.currentPage);
+            }
+        });
 
-  document.getElementById('next-page').addEventListener('click', function () {
-    if (initialState.pdf && initialState.currentPage < initialState.pdf.numPages) {
-      initialState.currentPage++;
-      renderPage(initialState.currentPage);
-    }
-  });
+        document.getElementById('zoom-out').addEventListener('click', function () {
+            if (initialState.pdf) {
+                initialState.zoom *= 2 / 3;
+                renderPage(initialState.currentPage);
+            }
+        });
 
-  document.getElementById('zoom-in').addEventListener('click', function () {
-    if (initialState.pdf) {
-      initialState.zoom *= 4 / 3; // Increase zoom scale
-      renderPage(initialState.currentPage); // Ensure correct page number is passed
-    }
-  });
+        document.getElementById('toggle-canvas').addEventListener('click', function () {
+            var canvas = document.getElementById('the-canvas');
+            initialState.canvasVisible = !initialState.canvasVisible;
+            canvas.style.display = initialState.canvasVisible ? 'block' : 'none';
+            document.getElementById('pdf-controls').style.display = initialState.canvasVisible ? 'block' : 'none';
+        });
 
-  document.getElementById('zoom-out').addEventListener('click', function () {
-    if (initialState.pdf) {
-      initialState.zoom *= 2 / 3; // Decrease zoom scale
-      renderPage(initialState.currentPage); // Ensure correct page number is passed
-    }
-  });
+        document.getElementById('download-pdf').addEventListener('click', function () {
+            var link = document.createElement('a');
+            link.href = url;
+            link.download = '2017AorticValveStenosisGuideline.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
 
-  document.getElementById('show-hide-canvas').addEventListener('click', function () {
-    var canvas = document.getElementById('the-canvas');
-    if (initialState.canvasVisible) {
-      canvas.style.display = 'none';
-      initialState.canvasVisible = false;
-    } else {
-      canvas.style.display = 'block';
-      initialState.canvasVisible = true;
-    }
-  });
+        document.getElementById('goto-page').addEventListener('click', function () {
+            var page = prompt('Enter page number:');
+            if (page && !isNaN(page) && page > 0 && page <= (initialState.pdf ? initialState.pdf.numPages : 0)) {
+                initialState.currentPage = parseInt(page, 10);
+                renderPage(initialState.currentPage);
+            }
+        });
 
-  document.getElementById('download-pdf').addEventListener('click', function () {
-    if (initialState.pdf) {
-      var link = document.createElement('a');
-      link.href = url;
-      link.download = 'document.pdf'; // You can specify a different name if needed
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  });
+        function renderPage(pageNumber) {
+            if (!initialState.pdf) return;
 
-  function renderPage(pageNumber) {
-    if (!initialState.pdf) return;
-
-    initialState.pdf.getPage(pageNumber).then((page) => {
-      const viewport = page.getViewport({ scale: initialState.zoom });
-      var canvas = document.getElementById('the-canvas');
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
-      const ctx = canvas.getContext('2d');
-      const renderContext = {
-        canvasContext: ctx,
-        viewport: viewport,
-      };
-      page.render(renderContext).promise.then(function() {
-        console.log('Page rendered');
-      }).catch(function(error) {
-        console.error('Error rendering page:', error);
-      });
-    }).catch(function(error) {
-      console.error('Error fetching page:', error);
-    });
-  }
-</script>
+            initialState.pdf.getPage(pageNumber).then((page) => {
+                const viewport = page.getViewport({ scale: initialState.zoom });
+                var canvas = document.getElementById('the-canvas');
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+                const ctx = canvas.getContext('2d');
+                const renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport,
+                };
+                page.render(renderContext);
+            });
+        }
+    </script>
 
         
 	</body>
