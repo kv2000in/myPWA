@@ -145,38 +145,53 @@ h1{
     font-size: 20px;
 }
 
-#pdfContainer {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-}
 
-#pdfViewer {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
-    height: 80%;
-    border: none;
-}
 
-#PDFbackButton {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 10px 20px;
-    background-color: red;
-    color: white;
-    border: none;
-    cursor: pointer;
-    z-index: 1001; /* Ensure it is on top of the PDF viewer */
-}
-#the-canvas {
-  border: 1px solid black;
-  direction: ltr;
-}
+
+    #pdf-controls {
+      display: none; /* Initially hide controls */
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    
+    #the-canvas {
+      display: none; /* Initially hide canvas */
+      border: 1px solid #ccc;
+      margin-top: 30px;
+      max-width: 100%;
+        direction: ltr;
+    }
+    
+    @media only screen and (max-width: 500px) {
+      #the-canvas {
+        max-width: 472px;
+      }
+    }
+    
+    .btn {
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: white;
+      font-size: 1.5em;
+      padding: 5px;
+      margin: 0 2px;
+    }
+    
+    .btn:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    #page-info {
+      margin-left: 10px;
+    }
+    
+    #zoom-controls {
+      margin-left: 10px;
+    }
