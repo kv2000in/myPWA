@@ -73,7 +73,7 @@
             </tr>
         
             <tr><td colspan="5"> <a href="https://www.youtube.com/watch?v=arBW-FfbIQE&feature=youtu.be">Webinar ASE 2017 Aortic Stenosis Guidlines
-                </a>  <button class="button" onclick="history.back();">Prev</button> <button id="toggle-canvas" class="buttonn">🖼️ Toggle PDF</button>
+                </a>  <button class="button" onclick="history.back();">Prev</button> <button id="toggle-canvas" class="button">🖼️ Toggle PDF</button> 
     <!--<button class="button" id="ShowPDFButtonAS" > Show PDF </button>--></td></tr>
              <!--<button class = "button" id="PDFbackButton">Hide PDF</button>-->
              </tbody>
@@ -118,7 +118,10 @@
     document.getElementById('ShowPDFButtonAS').style.display = 'inline'; // Show the toggle button
 });*/
 			</script>
-         <canvas id="the-canvas"></canvas>
+         <div id="pdf-container">
+    <canvas id="the-canvas"></canvas>
+             <button id="toggle-controls">⚙️</button>
+  </div>
   <div id="pdf-controls">
     <button id="prev-page" class="btn">&lt;</button>
     <button id="next-page" class="btn">&gt;</button>
@@ -132,110 +135,97 @@
   </div>
      
   <script type="module">
-    var url = './2017AorticValveStenosisGuideline.pdf';
-    var { pdfjsLib } = globalThis;
-    pdfjsLib.GlobalWorkerOptions.workerSrc = './pdfjs/pdf.worker.mjs';
+      var url = './2017AorticValveStenosisGuideline.pdf';
+pdfjsLib.GlobalWorkerOptions.workerSrc = './pdfjs/pdf.worker.mjs';
 
-    var loadingTask = pdfjsLib.getDocument({
-      url: url,
-      disableRange: true
+var loadingTask = pdfjsLib.getDocument({
+  url: url,
+  disableRange: true
+});
+
+let initialState = {
+  pdf: null,
+  currentPage: 1,
+  zoom: 1,
+};
+
+loadingTask.promise.then(function(pdf) {
+  initialState.pdf = pdf;
+  console.log('PDF loaded');
+  renderPage(initialState.currentPage);
+}, function (reason) {
+  console.error(reason);
+});
+
+document.getElementById('toggle-canvas').addEventListener('click', function () {
+  const canvas = document.getElementById('the-canvas');
+  canvas.style.display = canvas.style.display === 'none' ? 'block' : 'none';
+});
+
+document.getElementById('toggle-controls').addEventListener('click', function () {
+  const controls = document.getElementById('pdf-controls');
+  controls.classList.toggle('hidden');
+});
+
+document.getElementById('prev-page').addEventListener('click', function () {
+  if (initialState.pdf && initialState.currentPage > 1) {
+    initialState.currentPage--;
+    renderPage(initialState.currentPage);
+  }
+});
+
+document.getElementById('next-page').addEventListener('click', function () {
+  if (initialState.pdf && initialState.currentPage < initialState.pdf.numPages) {
+    initialState.currentPage++;
+    renderPage(initialState.currentPage);
+  }
+});
+
+document.getElementById('zoom-in').addEventListener('click', function () {
+  if (initialState.pdf) {
+    initialState.zoom *= 4 / 3;
+    renderPage(initialState.currentPage);
+  }
+});
+
+document.getElementById('zoom-out').addEventListener('click', function () {
+  if (initialState.pdf) {
+    initialState.zoom *= 2 / 3;
+    renderPage(initialState.currentPage);
+  }
+});
+
+document.getElementById('go-to-page').addEventListener('click', function () {
+  const pageNumber = parseInt(document.getElementById('goto-page').value, 10);
+  if (initialState.pdf && pageNumber >= 1 && pageNumber <= initialState.pdf.numPages) {
+    initialState.currentPage = pageNumber;
+    renderPage(pageNumber);
+  }
+});
+
+document.getElementById('download').addEventListener('click', function () {
+  window.open(url, '_blank');
+});
+
+function renderPage(pageNumber) {
+  if (!initialState.pdf) return;
+
+  initialState.pdf.getPage(pageNumber).then((page) => {
+    const viewport = page.getViewport({ scale: initialState.zoom });
+    const canvas = document.getElementById('the-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    const renderContext = {
+      canvasContext: ctx,
+      viewport: viewport,
+    };
+    page.render(renderContext).promise.then(() => {
+      document.getElementById('current-page').textContent = initialState.currentPage;
+      document.getElementById('total-pages').textContent = initialState.pdf.numPages;
     });
-
-    let pdfDoc = null;
-    let pageNum = 1;
-    let pageRendering = false;
-    let pageNumPending = null;
-    let scale = 1;
-
-    function renderPage(num) {
-      pageRendering = true;
-      pdfDoc.getPage(num).then(function(page) {
-        var viewport = page.getViewport({ scale: scale });
-        var canvas = document.getElementById('the-canvas');
-        var context = canvas.getContext('2d');
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
-        var renderContext = {
-          canvasContext: context,
-          viewport: viewport
-        };
-        var renderTask = page.render(renderContext);
-        renderTask.promise.then(function() {
-          pageRendering = false;
-          if (pageNumPending !== null) {
-            renderPage(pageNumPending);
-            pageNumPending = null;
-          }
-          document.getElementById('current-page').textContent = pageNum;
-        });
-      });
-    }
-
-    function queueRenderPage(num) {
-      if (pageRendering) {
-        pageNumPending = num;
-      } else {
-        renderPage(num);
-      }
-    }
-
-    document.getElementById('prev-page').addEventListener('click', function() {
-      if (pdfDoc && pageNum > 1) {
-        pageNum--;
-        queueRenderPage(pageNum);
-      }
-    });
-
-    document.getElementById('next-page').addEventListener('click', function() {
-      if (pdfDoc && pageNum < pdfDoc.numPages) {
-        pageNum++;
-        queueRenderPage(pageNum);
-      }
-    });
-
-    document.getElementById('zoom-in').addEventListener('click', function() {
-      scale *= 4 / 3;
-      queueRenderPage(pageNum);
-    });
-
-    document.getElementById('zoom-out').addEventListener('click', function() {
-      scale *= 2 / 3;
-      queueRenderPage(pageNum);
-    });
-
-    document.getElementById('go-to-page').addEventListener('click', function() {
-      var pageNumber = parseInt(document.getElementById('page-number-input').value, 10);
-      if (pageNumber > 0 && pageNumber <= pdfDoc.numPages) {
-        pageNum = pageNumber;
-        queueRenderPage(pageNum);
-      }
-    });
-
-    document.getElementById('toggle-canvas').addEventListener('click', function() {
-      var canvas = document.getElementById('the-canvas');
-      var controls = document.getElementById('pdf-controls');
-      if (canvas.style.display === 'none') {
-        canvas.style.display = 'block';
-        controls.style.display = 'block';
-      } else {
-        canvas.style.display = 'none';
-        controls.style.display = 'none';
-      }
-    });
-
-    document.getElementById('download-pdf').addEventListener('click', function() {
-      var link = document.createElement('a');
-      link.href = url;
-      link.download = url.split('/').pop();
-      link.click();
-    });
-
-    loadingTask.promise.then(function(pdf) {
-      pdfDoc = pdf;
-      document.getElementById('total-pages').textContent = pdf.numPages;
-      renderPage(pageNum);
-      document.getElementById('pdf-controls').style.display = 'block'; // Show controls after PDF is loaded
-    });
+  });
+}
   </script>
 
         

@@ -24,6 +24,8 @@ body, html {
     padding: 0;
     height: 100%;
 /*    overflow: hidden;*/
+
+  font-family: Arial, sans-serif;
 }
 
 img {
@@ -90,6 +92,9 @@ Make "item8" start on row-line 1 and column-line 2, and end on row-line 5 and co
 .item6 { grid-area: 6 / 1 / 6 / 12 ;} 
 .item7 { grid-area: 7 / 1 / 7 / 12 ;} 
 .item8 { grid-area: 8 / 1 / 8 / 12 ;} 
+      #the-canvas {
+    max-width: 472px;
+  }
 }
 
 
@@ -147,51 +152,47 @@ h1{
 
 
 
+body {
 
-    #pdf-controls {
-      display: none; /* Initially hide controls */
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      color: white;
-      padding: 10px;
-      box-sizing: border-box;
-    }
-    
-    #the-canvas {
-      display: none; /* Initially hide canvas */
-      border: 1px solid #ccc;
-      margin-top: 30px;
-      max-width: 100%;
-        direction: ltr;
-    }
-    
-    @media only screen and (max-width: 500px) {
-      #the-canvas {
-        max-width: 472px;
-      }
-    }
-    
-    .btn {
-      cursor: pointer;
-      border: none;
-      background: none;
-      color: white;
-      font-size: 1.5em;
-      padding: 5px;
-      margin: 0 2px;
-    }
-    
-    .btn:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-    
-    #page-info {
-      margin-left: 10px;
-    }
-    
-    #zoom-controls {
-      margin-left: 10px;
-    }
+}
+
+#pdf-container {
+  position: relative;
+}
+
+#the-canvas {
+  display: none; /* Initially hidden */
+  max-width: 100%;
+}
+
+#pdf-controls {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  text-align: center;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+#pdf-controls.hidden {
+  display: none;
+}
+
+#pdf-controls button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#pdf-controls #goto-page {
+  width: 60px;
+  text-align: center;
+}
+
