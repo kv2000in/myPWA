@@ -24,7 +24,7 @@
 		<h1>Aortic Stenosis</h1>
 		
 		<br>
-        <canvas id="the-canvas"></canvas> 
+         
 		 <table>
         <thead>
             <tr>
@@ -105,20 +105,30 @@
 							);
 			}
             
-      document.getElementById('ShowPDFButtonAS').addEventListener('click', function() {
+  /*    document.getElementById('ShowPDFButtonAS').addEventListener('click', function() {
     var pdfContainer = document.getElementById('pdfContainer');
     pdfContainer.style.display = 'block';
     this.style.display = 'none'; // Hide the show button
-});
+});*/
 
-document.getElementById('PDFbackButton').addEventListener('click', function() {
+/*document.getElementById('PDFbackButton').addEventListener('click', function() {
     var pdfContainer = document.getElementById('pdfContainer');
     pdfContainer.style.display = 'none';
     document.getElementById('ShowPDFButtonAS').style.display = 'inline'; // Show the toggle button
-});
+});*/
 			</script>
-        
+        <canvas id="the-canvas"></canvas>
+        <button id="prev-page">Previous Page</button>
+<button id="next-page">Next Page</button>
+        <button id="zoom-in">Zoom In</button>
+<button id="zoom-out">Zoom Out</button>
 <script type="module">
+   
+
+
+  
+
+
   // If absolute URL from the remote server is provided, configure the CORS
   // header on that server.
   var url = './2017AorticValveStenosisGuideline.pdf';
@@ -139,7 +149,7 @@ document.getElementById('PDFbackButton').addEventListener('click', function() {
     pdf.getPage(pageNumber).then(function(page) {
       console.log('Page loaded');
 
-      var scale = 1.5;
+      var scale = 1;
       var viewport = page.getViewport({scale: scale});
 
       // Prepare canvas using PDF page dimensions
@@ -162,8 +172,54 @@ document.getElementById('PDFbackButton').addEventListener('click', function() {
     // PDF loading error
     console.error(reason);
   });
+    
+    const initialState = {
+  pdf: null,
+  currentPage: 1,
+  zoom: 1,
+};
+    document.getElementById('prev-page').addEventListener('click', function () {
+  if (initialState.pdf && initialState.currentPage > 1) {
+    initialState.currentPage--;
+    renderPage(initialState.currentPage);
+  }
+});
+
+document.getElementById('next-page').addEventListener('click', function () {
+  if (initialState.pdf && initialState.currentPage < initialState.pdf.numPages) {
+    initialState.currentPage++;
+    renderPage(initialState.currentPage);
+  }
+});  
+    
+document.getElementById('zoom-in').addEventListener('click', function () {
+  if (initialState.pdf) {
+    initialState.zoom *= 4 / 3; // Increase zoom scale
+    renderPage();
+  }
+});
+
+document.getElementById('zoom-out').addEventListener('click', function () {
+  if (initialState.pdf) {
+    initialState.zoom *= 2 / 3; // Decrease zoom scale
+    renderPage();
+  }
+});    
+function renderPage(pageNumber) {
+  if (!initialState.pdf) return;
+
+  initialState.pdf.getPage(pageNumber).then((page) => {
+    const viewport = page.getViewport({ scale: initialState.zoom });
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    const ctx = canvas.getContext('2d');
+    const renderContext = {
+      canvasContext: ctx,
+      viewport: viewport,
+    };
+      
 </script>
-     <canvas id="the-canvas"></canvas>   
+     
 	</body>
 </html>
 
