@@ -162,7 +162,7 @@ body {
 
 #the-canvas {
   display: none; /* Initially hidden */
-  max-width: 100%;
+  max-width: 800%;
 }
 
 #pdf-controls {
@@ -187,10 +187,13 @@ body {
   background: none;
   border: none;
   color: white;
-  font-size: 16px;
+  font-size: 32px;
   cursor: pointer;
 }
 
+#pdf-controls input {
+  width:32px;
+}
 #pdf-controls #goto-page {
   width: 60px;
   text-align: center;
