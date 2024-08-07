@@ -203,9 +203,16 @@ document.getElementById('go-to-page').addEventListener('click', function () {
   }
 });
 
-document.getElementById('download').addEventListener('click', function () {
-  window.open(url, '_blank');
-});
+  document.getElementById('download-pdf').addEventListener('click', function () {
+    if (initialState.pdf) {
+      var link = document.createElement('a');
+      link.href = url;
+      link.download = '2017AorticValveStenosisGuideline.pdf'; // You can specify a different name if needed
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  });
 
 function renderPage(pageNumber) {
   if (!initialState.pdf) return;
