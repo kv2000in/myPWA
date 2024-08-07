@@ -176,3 +176,7 @@ h1{
     cursor: pointer;
     z-index: 1001; /* Ensure it is on top of the PDF viewer */
 }
+#the-canvas {
+  border: 1px solid black;
+  direction: ltr;
+}
