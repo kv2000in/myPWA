@@ -123,12 +123,7 @@
         <button id="zoom-in">Zoom In</button>
 <button id="zoom-out">Zoom Out</button>
 <script type="module">
-   
-
-
-  
-
-
+<script type="module">
   // If absolute URL from the remote server is provided, configure the CORS
   // header on that server.
   var url = './2017AorticValveStenosisGuideline.pdf';
@@ -172,51 +167,59 @@
     // PDF loading error
     console.error(reason);
   });
-    
-    const initialState = {
-  pdf: null,
-  currentPage: 1,
-  zoom: 1,
-};
-    document.getElementById('prev-page').addEventListener('click', function () {
-  if (initialState.pdf && initialState.currentPage > 1) {
-    initialState.currentPage--;
-    renderPage(initialState.currentPage);
-  }
-});
 
-document.getElementById('next-page').addEventListener('click', function () {
-  if (initialState.pdf && initialState.currentPage < initialState.pdf.numPages) {
-    initialState.currentPage++;
-    renderPage(initialState.currentPage);
-  }
-});  
-    
-document.getElementById('zoom-in').addEventListener('click', function () {
-  if (initialState.pdf) {
-    initialState.zoom *= 4 / 3; // Increase zoom scale
-    renderPage();
-  }
-});
+  const initialState = {
+    pdf: null,
+    currentPage: 1,
+    zoom: 1,
+  };
 
-document.getElementById('zoom-out').addEventListener('click', function () {
-  if (initialState.pdf) {
-    initialState.zoom *= 2 / 3; // Decrease zoom scale
-    renderPage();
-  }
-});    
-function renderPage(pageNumber) {
-  if (!initialState.pdf) return;
+  document.getElementById('prev-page').addEventListener('click', function () {
+    if (initialState.pdf && initialState.currentPage > 1) {
+      initialState.currentPage--;
+      renderPage(initialState.currentPage);
+    }
+  });
 
-  initialState.pdf.getPage(pageNumber).then((page) => {
-    const viewport = page.getViewport({ scale: initialState.zoom });
-    canvas.width = viewport.width;
-    canvas.height = viewport.height;
-    const ctx = canvas.getContext('2d');
-    const renderContext = {
-      canvasContext: ctx,
-      viewport: viewport,
-    };
+  document.getElementById('next-page').addEventListener('click', function () {
+    if (initialState.pdf && initialState.currentPage < initialState.pdf.numPages) {
+      initialState.currentPage++;
+      renderPage(initialState.currentPage);
+    }
+  });
+
+  document.getElementById('zoom-in').addEventListener('click', function () {
+    if (initialState.pdf) {
+      initialState.zoom *= 4 / 3; // Increase zoom scale
+      renderPage(initialState.currentPage); // Ensure correct page number is passed
+    }
+  });
+
+  document.getElementById('zoom-out').addEventListener('click', function () {
+    if (initialState.pdf) {
+      initialState.zoom *= 2 / 3; // Decrease zoom scale
+      renderPage(initialState.currentPage); // Ensure correct page number is passed
+    }
+  });
+
+  function renderPage(pageNumber) {
+    if (!initialState.pdf) return;
+
+    initialState.pdf.getPage(pageNumber).then((page) => {
+      const viewport = page.getViewport({ scale: initialState.zoom });
+      var canvas = document.getElementById('the-canvas');
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      const ctx = canvas.getContext('2d');
+      const renderContext = {
+        canvasContext: ctx,
+        viewport: viewport,
+      };
+      page.render(renderContext);
+    });
+  }
+</script>
+
       
 </script>
      
