@@ -73,7 +73,8 @@
             </tr>
         
             <tr><td colspan="5"> <a href="https://www.youtube.com/watch?v=arBW-FfbIQE&feature=youtu.be">Webinar ASE 2017 Aortic Stenosis Guidlines
-                </a> <!--<button class="button" id="ShowPDFButtonAS" > Show PDF </button>--></td></tr>
+                </a>     <button class = "button" id="show-hide-canvas">Toggle PDF</button>
+    <!--<button class="button" id="ShowPDFButtonAS" > Show PDF </button>--></td></tr>
              <!--<button class = "button" id="PDFbackButton">Hide PDF</button>-->
              </tbody>
     </table>
@@ -118,14 +119,12 @@
 });*/
 			</script>
         <canvas id="the-canvas"></canvas>
-        <button id="prev-page">Previous Page</button>
-<button id="next-page">Next Page</button>
-        <button id="zoom-in">Zoom In</button>
-<button id="zoom-out">Zoom Out</button>
-<script type="module">
+        <button  class = "button pdf" id="prev-page">Previous Page</button>
+<button class = "button pdf" id="next-page">Next Page</button>
+        <button class = "button pdf" id="zoom-in">Zoom In</button>
+<button class = "button pdf" id="zoom-out">Zoom Out</button> <button class = "button pdf" id="download-pdf">Download PDF</button>
 
-
-
+  <script type="module">
   // If absolute URL from the remote server is provided, configure the CORS
   // header on that server.
   var url = './2017AorticValveStenosisGuideline.pdf';
@@ -155,6 +154,7 @@
     pdf: null,
     currentPage: 1,
     zoom: 1,
+    canvasVisible: true
   };
 
   document.getElementById('prev-page').addEventListener('click', function () {
@@ -185,6 +185,28 @@
     }
   });
 
+  document.getElementById('show-hide-canvas').addEventListener('click', function () {
+    var canvas = document.getElementById('the-canvas');
+    if (initialState.canvasVisible) {
+      canvas.style.display = 'none';
+      initialState.canvasVisible = false;
+    } else {
+      canvas.style.display = 'block';
+      initialState.canvasVisible = true;
+    }
+  });
+
+  document.getElementById('download-pdf').addEventListener('click', function () {
+    if (initialState.pdf) {
+      var link = document.createElement('a');
+      link.href = url;
+      link.download = 'document.pdf'; // You can specify a different name if needed
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  });
+
   function renderPage(pageNumber) {
     if (!initialState.pdf) return;
 
@@ -207,11 +229,9 @@
       console.error('Error fetching page:', error);
     });
   }
-
-
-      
 </script>
-     
+
+        
 	</body>
 </html>
 
