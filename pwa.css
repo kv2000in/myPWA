@@ -162,7 +162,7 @@ body {
 
 #the-canvas {
   display: none; /* Initially hidden */
-  max-width: 800%;
+  max-width: 100%;
 }
 
 #pdf-controls {
