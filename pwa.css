@@ -93,7 +93,12 @@ Make "item8" start on row-line 1 and column-line 2, and end on row-line 5 and co
 .item7 { grid-area: 7 / 1 / 7 / 12 ;} 
 .item8 { grid-area: 8 / 1 / 8 / 12 ;} 
       #the-canvas {
+        width: 100%;
     max-width: 472px;
+
+    /* Add webkit prefixes */
+    -webkit-width: 100%;
+    -webkit-max-width: 472px;
   }
 }
 
@@ -165,7 +170,7 @@ body {
   max-width: 100%;
 }
 
-#pdf-controls {
+/*#pdf-controls {
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -177,22 +182,77 @@ body {
   justify-content: center;
   align-items: center;
   gap: 10px;
+}*/
+
+#pdf-controls {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+
+  /* Add webkit prefixes */
+  -webkit-display: flex;
+  -webkit-justify-content: center;
+  -webkit-align-items: center;
+  -webkit-background-color: rgba(0, 0, 0, 0.8);
+  -webkit-padding: 10px;
+  -webkit-opacity: 0;
+  -webkit-visibility: hidden;
+  -webkit-transition: opacity 0.3s, visibility 0.3s;
 }
 
 #pdf-controls.hidden {
   display: none;
 }
 
-#pdf-controls button {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 32px;
-  cursor: pointer;
+#pdf-controls.visible {
+  opacity: 1;
+  visibility: visible;
+
+  /* Add webkit prefixes */
+  -webkit-opacity: 1;
+  -webkit-visibility: visible;
 }
 
-#pdf-controls input {
-  width:32px;
+#pdf-controls button {
+  margin: 0 5px;
+  padding: 10px;
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 32px;
+
+  /* Add webkit prefixes */
+  -webkit-margin: 0 5px;
+  -webkit-padding: 10px;
+  -webkit-background-color: #fff;
+  -webkit-border: none;
+  -webkit-border-radius: 5px;
+  -webkit-cursor: pointer;
+  -webkit-font-size: 32px;
+}
+
+#pdf-controls input[type="number"] {
+  width: 32px;
+  padding: 5px;
+  font-size: 16px;
+  text-align: center;
+
+  /* Add webkit prefixes */
+  -webkit-width: 50px;
+  -webkit-padding: 5px;
+  -webkit-font-size: 16px;
+  -webkit-text-align: center;
 }
 #pdf-controls #goto-page {
   width: 60px;

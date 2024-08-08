@@ -158,11 +158,21 @@ loadingTask.promise.then(function(pdf) {
   console.error(reason);
 });
 
-document.getElementById('toggle-canvas').addEventListener('click', function () {
-  const canvas = document.getElementById('the-canvas');
-  canvas.style.display = canvas.style.display === 'none' ? 'block' : 'none';
-});
 
+
+document.getElementById('toggle-canvas').addEventListener('click', function () {
+  var canvas = document.getElementById('the-canvas');
+  var controls = document.getElementById('pdf-controls');
+  if (canvas.style.display === 'none' || canvas.style.display === '') {
+    canvas.style.display = 'block';
+    controls.classList.add('visible');
+  } else {
+    canvas.style.display = 'none';
+    controls.classList.remove('visible');
+  }
+});
+      
+      
 document.getElementById('toggle-controls').addEventListener('click', function () {
   const controls = document.getElementById('pdf-controls');
   controls.classList.toggle('hidden');
